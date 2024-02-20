@@ -22,7 +22,7 @@ from sqlalchemy.dialects.mysql import insert
 import streamlit as st
 api_service_name = "youtube"
 api_version = "v3"
-api_key = 'AIzaSyC-qf_tEyJxQdH1BoWzRN6YbfrmgmYXNKc'
+api_key = 'enter your api key'
 youtube = build(api_service_name, api_version,developerKey=api_key)
 
 #streamlit
@@ -184,7 +184,7 @@ def get_comment_threads(video_ids):
 #mongo db:
 from pymongo import MongoClient
 from pymongo import MongoClient
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://localhost:____/")
 db= client['first_pr_youtube']
 coll1= db["channel_details"]
 
@@ -223,7 +223,7 @@ if channel_id and st.sidebar.button("Store in MongoDB"):
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="laptop")
+  password="abcd")
 cursor = mydb.cursor()
 
 def channels_table():
@@ -232,7 +232,7 @@ def channels_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="laptop",
+        password="abcd",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -292,7 +292,7 @@ def playlists_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="laptop",
+        password="abcd",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -348,7 +348,7 @@ def videos_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="laptop",
+        password="abcd",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -425,7 +425,7 @@ def comments_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="laptop",
+        password="abcd",
         database="youtube_data")
         
     cursor = mydb.cursor()
