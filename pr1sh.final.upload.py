@@ -22,18 +22,42 @@ from sqlalchemy.dialects.mysql import insert
 import streamlit as st
 api_service_name = "youtube"
 api_version = "v3"
-api_key = 'enter your api key'
+api_key = 'AIzaSyC-qf_tEyJxQdH1BoWzRN6YbfrmgmYXNKc'
 youtube = build(api_service_name, api_version,developerKey=api_key)
 
 #streamlit
 # Logo
-image_path = "./YT_logo.png"
+image_path = "./YT.logo.png"
 st.image(image_path, width=100)
+
+# SETTING-UP BACKGROUND IMAGE
+st.markdown(f""" <style>.stApp {{
+                        background:url("https://wallpapers.com/images/high/pastel-abstract-qp6ehh9uvdv982nx.webp");
+                        background-size: cover}}
+                     </style>""", unsafe_allow_html=True)
 
 # Adding a title to your Streamlit app with custom styling
 st.markdown(
-    '<h1 style="text-align:center; color:teal; font-size:2em; margin-top: -65px;">YOUTUBE DATA HARVESTING AND WAREHOUSING</h1>',
+    '<h1 style="text-align:center; color:teal; font-size:3em; margin-top: -40px;">YOUTUBE DATA HARVESTING AND WAREHOUSING</h1>',
     unsafe_allow_html=True)
+
+# Sidebar with tabs
+selected_tab = st.sidebar.radio(" ", ["Home","Let's Start"])
+
+# Display content based on selected tab
+if selected_tab == "Home":
+    st.markdown('<h2 style="color: teal; font-size: 1.5em;">Introduction:</h2>', unsafe_allow_html=True)
+    st.info("This project focuses on harvesting and warehousing YouTube data using Python, MongoDB, MySQL, and Streamlit. "
+            "Streamlit, a powerful Python library, is integrated to provide a user-friendly interface, making it easy for "
+            "users to interact with the data. Streamlit's simplicity and efficiency enable quick development of web "
+            "applications without the need for extensive frontend knowledge.")
+
+    st.markdown('<h2 style="color: teal; font-size: 1.5em;">Application:</h2>', unsafe_allow_html=True)
+    st.info("The application of this project extends to content creators, marketers, and analysts who seek comprehensive "
+            "insights into YouTube channel performance. By leveraging the collected data, users can make informed decisions, "
+            "analyze trends, and gain a deeper understanding of audience engagement, ultimately enhancing their content strategy "
+            "and optimizing their online presence.")
+    
 
 #start scrapping data:
 
@@ -184,7 +208,7 @@ def get_comment_threads(video_ids):
 #mongo db:
 from pymongo import MongoClient
 from pymongo import MongoClient
-client = MongoClient("mongodb://localhost:____/")
+client = MongoClient("mongodb://localhost:27017/")
 db= client['first_pr_youtube']
 coll1= db["channel_details"]
 
@@ -206,6 +230,7 @@ def main(channel_id):
     return data
 
 #now connect all functions to streamlit
+
 channel_id=st.sidebar.text_input('Enter the Channel ID:')
 if channel_id and st.sidebar.button("Scrap"):
     a=main(channel_id)
@@ -223,7 +248,7 @@ if channel_id and st.sidebar.button("Store in MongoDB"):
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="abcd")
+  password="laptop")
 cursor = mydb.cursor()
 
 def channels_table():
@@ -232,7 +257,7 @@ def channels_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="abcd",
+        password="laptop",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -292,7 +317,7 @@ def playlists_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="abcd",
+        password="laptop",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -348,7 +373,7 @@ def videos_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="abcd",
+        password="laptop",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -425,7 +450,7 @@ def comments_table():
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="abcd",
+        password="laptop",
         database="youtube_data")
         
     cursor = mydb.cursor()
@@ -662,3 +687,4 @@ if channel_id:
         t10 = cursor.fetchall()
         st.write(pd.DataFrame(t10, columns=["Channel Name","Video Name","No of Comments"]))
         mydb.commit()
+
